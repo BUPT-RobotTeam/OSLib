@@ -8,7 +8,6 @@
 #define ELOG_PORT_H_
 
 #include "components/easylogger/inc/elog.h"
-#include "cmsis_os2.h"
 
 
 

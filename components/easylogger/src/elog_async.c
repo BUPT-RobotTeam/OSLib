@@ -99,7 +99,7 @@ static bool buf_is_empty = true;
 extern void elog_port_output(const char *log, size_t size);
 extern void elog_output_lock(void);
 extern void elog_output_unlock(void);
-extern void elog_port_async_lock(void);
+extern uint8_t elog_port_async_lock(void);
 extern void elog_port_async_unlock(void);
 
 /**

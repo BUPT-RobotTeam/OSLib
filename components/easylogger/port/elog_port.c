@@ -27,7 +27,9 @@
  */
  
 #include <components/easylogger/inc/elog.h>
-
+#include "cmsis_os2.h"
+#include "FreeRTOS.h"
+#include "cmsis_os.h"
 #include "oslib_config.h"
 ///< 两个模块都开启，才能使能对应代码，否则直接函数置空
 #if defined(OSLIB_UART_MODULE_ENABLED) &&  defined(OSLIB_LOG_MODULE_ENABLED)
@@ -113,12 +115,22 @@ void elog_port_output(const char *log, size_t size) {
 /**
  * async lock
  */
-void elog_port_async_lock(void) {
+uint8_t elog_port_async_lock(void) {
     
     /* add your code here */
+    if(xPortIsInsideInterrupt())
+    {
+        if(osSemaphoreAcquire(elogAsyncBuff_sema,0) != osOK)
+        {
+            return 0;
+        }
+
+    }
+
     while (osSemaphoreAcquire(elogAsyncBuff_sema,osWaitForever) != osOK)
         ;
 
+    return 1;
 }
 
 /**
@@ -134,12 +146,20 @@ void elog_port_async_unlock(void) {
 /**
  * output lock
  */
-void elog_port_output_lock(void) {
+uint8_t elog_port_output_lock(void) {
 
     /* add your code here */
-    while (osSemaphoreAcquire(elogLock_sema,osWaitForever) != osOK)
-        ;
+    if(xPortIsInsideInterrupt())
+    {
+        if(osSemaphoreAcquire(elogAsyncBuff_sema,0) != osOK)
+        {
+            return 0;
+        }
 
+    }
+    while (osSemaphoreAcquire(elogLock_sema, osWaitForever) != osOK)
+        ;
+    return 1;
 }
 
 /**

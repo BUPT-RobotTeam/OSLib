@@ -152,17 +152,17 @@ static void Command_Log_SetTagFiltLVL(OSLIB_UART_Handle_t *uart_handle, int argc
  */
 void OSLIB_UART_CLI_AddElogCMD(OSLIB_UART_Handle_t * uart_handle)
 {
-    OSLIB_UART_CLI_AddCommand(uart_handle, "log_en",
-                              "Enable Elog Output,log_enable 0/f(alse)/F(alse)/1/t(rue)/T(rue)",
+    OSLIB_UART_CLI_AddCommand(uart_handle, "log-en",
+                              "Enable Elog Output,log-enable 0/f(alse)/F(alse)/1/t(rue)/T(rue)",
                               Command_Log_OutPutEnable);
-    OSLIB_UART_CLI_AddCommand(uart_handle, "log_colen",
-                              "Enable Elog color Output,log_colen 0/f(alse)/F(alse)/1/t(rue)/T(rue)",
+    OSLIB_UART_CLI_AddCommand(uart_handle, "log-colen",
+                              "Enable Elog color Output,log-colen 0/f(alse)/F(alse)/1/t(rue)/T(rue)",
                               Command_Log_ColorEnable);
-    OSLIB_UART_CLI_AddCommand(uart_handle, "log_filt",
-                              "Set Elog global LVL filter,log_filt LVL(number0~5/a/e/w/i/d/v/s)",
+    OSLIB_UART_CLI_AddCommand(uart_handle, "log-filt",
+                              "Set Elog global LVL filter,log-filt LVL(number0~5/a/e/w/i/d/v/s)",
                               Command_Log_SetFiltLVL);
-    OSLIB_UART_CLI_AddCommand(uart_handle, "log_tagfilt",
-                              "Set Elog tag LVL filter,log_tagfilt tag LVL(number0~5/a/e/w/i/d/v/s)",
+    OSLIB_UART_CLI_AddCommand(uart_handle, "log-tagfilt",
+                              "Set Elog tag LVL filter,log-tagfilt tag LVL(number0~5/a/e/w/i/d/v/s)",
                               Command_Log_SetTagFiltLVL);
 }
 
